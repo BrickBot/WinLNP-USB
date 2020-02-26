@@ -1,0 +1,85 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: WinLNP - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"..\Release/WinLNP.res" /d "_DEBUG" "D:\legOS\legOS\WinLNP\SRC\WinLNP.rc"" 
+Creating temporary file "D:\SYSTEMP\RSP42B4.TMP" with contents
+[
+/nologo /MT /W3 /D "WIN32" /D "_WINDOWS" /D "_MBCS" /FR"..\Release/" /Fp"..\Release/WinLNP.pch" /Yu"stdafx.h" /Fo"..\Release/" /Fd"..\Release/" /FD /GZ /c 
+"D:\legOS\legOS\WinLNP\SRC\LGXHost.cpp"
+"D:\legOS\legOS\WinLNP\SRC\LGXLNPHl.cpp"
+"D:\legOS\legOS\WinLNP\SRC\LGXSystm.cpp"
+"D:\legOS\legOS\WinLNP\SRC\LNPManager.cpp"
+"D:\legOS\legOS\WinLNP\SRC\LNPPort.cpp"
+"D:\legOS\legOS\WinLNP\SRC\LNPSession.cpp"
+"D:\legOS\legOS\WinLNP\SRC\WinLNP.cpp"
+]
+Creating command line "cl.exe @D:\SYSTEMP\RSP42B4.TMP" 
+Creating temporary file "D:\SYSTEMP\RSP42B5.TMP" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /incremental:no /pdb:"..\Release/WinLNP.pdb" /machine:I386 /out:"..\Release/WinLNP.exe" /pdbtype:sept 
+\legOS\legOS\WinLNP\Release\LGXHost.obj
+\legOS\legOS\WinLNP\Release\LGXLNPHl.obj
+\legOS\legOS\WinLNP\Release\LGXPort.obj
+\legOS\legOS\WinLNP\Release\LGXPrgrm.obj
+\legOS\legOS\WinLNP\Release\LGXSystm.obj
+\legOS\legOS\WinLNP\Release\LGXTower.obj
+\legOS\legOS\WinLNP\Release\LNPManager.obj
+\legOS\legOS\WinLNP\Release\LNPPort.obj
+\legOS\legOS\WinLNP\Release\LNPSession.obj
+\legOS\legOS\WinLNP\Release\StdAfx.obj
+\legOS\legOS\WinLNP\Release\WinLNP.obj
+\legOS\legOS\WinLNP\Release\WinLNP.res
+]
+Creating command line "link.exe @D:\SYSTEMP\RSP42B5.TMP"
+Creating temporary file "D:\SYSTEMP\RSP42B6.BAT" with contents
+[
+@echo off
+"\legOS\legOS\WinLNP\Release\WinLNP.exe" /RegServer
+echo regsvr32 exec. time > ".\..\Release\regsvr32.trg"
+echo Server registration done!
+]
+Creating command line "D:\SYSTEMP\RSP42B6.BAT"
+Compiling resources...
+Compiling...
+LGXHost.cpp
+LGXLNPHl.cpp
+LGXSystm.cpp
+LNPManager.cpp
+LNPPort.cpp
+LNPSession.cpp
+WinLNP.cpp
+Generating Code...
+Linking...
+<h3>Output Window</h3>
+Performing registration
+Server registration done!
+Creating temporary file "D:\SYSTEMP\RSP4346.TMP" with contents
+[
+/nologo /o"..\Release/WinLNP.bsc" 
+\legOS\legOS\WinLNP\Release\StdAfx.sbr
+\legOS\legOS\WinLNP\Release\LGXHost.sbr
+\legOS\legOS\WinLNP\Release\LGXLNPHl.sbr
+\legOS\legOS\WinLNP\Release\LGXPort.sbr
+\legOS\legOS\WinLNP\Release\LGXPrgrm.sbr
+\legOS\legOS\WinLNP\Release\LGXSystm.sbr
+\legOS\legOS\WinLNP\Release\LGXTower.sbr
+\legOS\legOS\WinLNP\Release\LNPManager.sbr
+\legOS\legOS\WinLNP\Release\LNPPort.sbr
+\legOS\legOS\WinLNP\Release\LNPSession.sbr
+\legOS\legOS\WinLNP\Release\WinLNP.sbr]
+Creating command line "bscmake.exe @D:\SYSTEMP\RSP4346.TMP"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+WinLNP.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

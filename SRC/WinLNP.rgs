@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		{174F042B-ADFF-4DF9-9E6E-9C90EE6B87CA} = s 'WinLNP'
+		'WinLNP.EXE'
+		{
+			val AppID = s {174F042B-ADFF-4DF9-9E6E-9C90EE6B87CA}
+		}
+	}
+}

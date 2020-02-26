@@ -1,0 +1,23 @@
+HKCR
+{
+	WinLNP.LNPManager.1 = s 'LNPManager Class'
+	{
+		CLSID = s '{D0F142C2-C587-4A64-A4D2-D53CB0C02A58}'
+	}
+	WinLNP.LNPManager = s 'LNPManager Class'
+	{
+		CLSID = s '{D0F142C2-C587-4A64-A4D2-D53CB0C02A58}'
+		CurVer = s 'WinLNP.LNPManager.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D0F142C2-C587-4A64-A4D2-D53CB0C02A58} = s 'LNPManager Class'
+		{
+			ProgID = s 'WinLNP.LNPManager.1'
+			VersionIndependentProgID = s 'WinLNP.LNPManager'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '{174F042B-ADFF-4DF9-9E6E-9C90EE6B87CA}'
+			'TypeLib' = s '{D347EA9F-27BE-404D-95CA-11E385F8FF05}'
+		}
+	}
+}

@@ -1,0 +1,24 @@
+HKCR
+{
+	WinLNP.LNPSession.1 = s 'LNPSession Class'
+	{
+		CLSID = s '{F2C4E6A4-8129-45C9-82C7-3E0A102FF8A5}'
+	}
+	WinLNP.LNPSession = s 'LNPSession Class'
+	{
+		CLSID = s '{F2C4E6A4-8129-45C9-82C7-3E0A102FF8A5}'
+		CurVer = s 'WinLNP.LNPSession.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F2C4E6A4-8129-45C9-82C7-3E0A102FF8A5} = s 'LNPSession Class'
+		{
+			ProgID = s 'WinLNP.LNPSession.1'
+			VersionIndependentProgID = s 'WinLNP.LNPSession'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '{174F042B-ADFF-4DF9-9E6E-9C90EE6B87CA}'
+			'TypeLib' = s '{D347EA9F-27BE-404D-95CA-11E385F8FF05}'
+		}
+	}
+}

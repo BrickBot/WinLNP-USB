@@ -1,0 +1,246 @@
+// WinLNP.idl : IDL source for WinLNP.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (WinLNP.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+	
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Data Format enumeration
+	// Public type  available from the type librairy
+	//
+	// BSTR_ArrayOfByte: Data are exchanged through variant of type VT_BSTR.
+	//                   BSTRs are used as array of bytes
+	//
+	// BSTR_FormatedString: Data are exchanged through variant of type VT_BSTR.
+	//                      BSTRs contain a seqence of "0xXX" items separated by spaces.
+	//                      Ex: "0x04 0x20 0x00 0x01 0x01 0x26"
+	//	
+	typedef [v1_enum] enum  
+	{
+		BSTR_ArrayOfByte = 0,
+		BSTR_FormatedString,
+	} ELNPDataFormat; 
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Manager Interface
+	// Public interface available from the type librairy
+	//	
+	[
+		object,
+		uuid(1C5EF50E-59D4-4451-82FB-10CA722750BC),	
+		helpstring("ILNPManager Interface"),
+		oleautomation,
+		pointer_default(unique)
+	]
+	interface ILNPManager : IDispatch
+	{
+		[helpstring("method GetNbMaxSession")] HRESULT GetNbMaxSession([out, retval] BYTE *pnMaxSession);
+		[helpstring("method GetPCHostID")] HRESULT GetPCHostID([out, retval] BYTE *pnPCHostID);
+		[helpstring("method CreateNewSession")] HRESULT CreateNewSession([out, retval] IDispatch **ppSession);		
+		[helpstring("method CreateSessionOnPort")] HRESULT CreateSessionOnPort([in] BYTE nPortID, [out, retval] IDispatch **ppSession);		
+		[helpstring("method DownloadProgram")] HRESULT DownloadProgram([in] BYTE nHostID, [in] BYTE nPrgID, [in] VARIANT vFileName);
+		[helpstring("method DeleteProgram")] HRESULT DeleteProgram([in] BYTE nHostID, [in] BYTE nPrgID);
+		[helpstring("method RunProgram")] HRESULT RunProgram([in] BYTE nHostID, [in] BYTE nPrgID);
+		[helpstring("method RunKeepAlive")] HRESULT RunKeepAlive([in] BOOL bRun);
+		[helpstring("method IsKeepAliveRunning")] HRESULT IsKeepAliveRunning([out, retval] BOOL *pbRun);
+	};
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Manager Interface Private
+	// Private interface not available from the type librairy
+	//	
+	[
+		object,
+		uuid(05FEE9DB-6139-4ff2-B4EC-A817CF462064),
+		helpstring("ILNPManagerPrivate Interface"),
+		oleautomation,
+		pointer_default(unique)
+	]
+	interface ILNPManagerPrivate : IUnknown
+	{		
+		[helpstring("method NotifyDeathOfSession")] HRESULT NotifyDeathOfSession([in] BYTE nSessionID);
+	};
+
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Session Interface
+	// Public interface available from the type librairy
+	//	
+	[
+		object,
+		uuid(7F37B1DC-748C-4DBA-A64E-E73668C2AB48),
+		helpstring("ILNPSession Interface"),
+		oleautomation,
+		pointer_default(unique)
+	]
+	interface ILNPSession : IDispatch
+	{
+		[helpstring("method GetSessionID")] HRESULT GetSessionID([out, retval] BYTE *pnSessionID);
+		[helpstring("method OpenPort")] HRESULT OpenPort([in] BYTE nHostID, [in] BYTE nPortID, [out, retval] IDispatch **ppPort);
+	};
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Session Interface Private
+	// Private interface not available from the type librairy
+	//	
+	[
+		object,
+		uuid(791E0FD3-0A69-4b68-B203-8059E42E65D6),
+		helpstring("ILNPSessionPrivate Interface"),
+		oleautomation,
+		pointer_default(unique)
+	]
+	interface ILNPSessionPrivate : IUnknown
+	{
+		[helpstring("method Init")] HRESULT Init([in] BYTE nPCHostID, 
+		                                         [in] BYTE nSessionID, 
+		                                         [in] IUnknown *pManager);
+		[helpstring("method NotifyDeathOfPort")] HRESULT NotifyDeathOfPort([in] BYTE nHostID, [in] BYTE nPortID);
+	};
+
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Port Interface
+	// Public interface available from the type librairy
+	//	
+	[
+		object,
+		uuid(7C848834-EED7-43CA-AFF7-49FC6358F845),	
+		helpstring("ILNPPort Interface"),
+		oleautomation,
+		pointer_default(unique)
+	]
+	interface ILNPPort : IDispatch
+	{		
+		[helpstring("method GetHostID")] HRESULT GetHostID([out, retval] BYTE *pnHostID);
+		[helpstring("method GetPortID")] HRESULT GetPortID([out, retval] BYTE *pnPortID);
+		[helpstring("method Send")] HRESULT Send([in] VARIANT acData);
+		[helpstring("method SetDataFormat")] HRESULT SetDataFormat([in] ELNPDataFormat eDataFormat);
+	};		
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Port Interface Private
+	// Private interface not available from the type librairy
+	//	
+	[
+		object,
+		uuid(E44A14BA-385D-484f-8B8C-E33C9B7BA847),
+		helpstring("ILNPPortPrivate Interface"),
+		oleautomation,
+		pointer_default(unique)
+	]
+	interface ILNPPortPrivate : IUnknown
+	{
+		[helpstring("method Init")] HRESULT Init([in] BYTE nSessionID, 
+		                                         [in] BYTE nHostID, 
+		                                         [in] BYTE nPortID, 
+		                                         [in] IUnknown *pSession);
+	};
+
+[
+	uuid(D347EA9F-27BE-404D-95CA-11E385F8FF05),
+	version(1.0),
+	helpstring("WinLNP 1.0 Type Library")
+]
+library WINLNPLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");	
+
+/* Don't want to see them in the type lib as long as they're used !
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Manager Events Handler Interface
+	//	
+	[
+		uuid(14A3BE13-BD10-4E29-AD96-8E22478CE9AE),
+		helpstring("_ILNPManagerEvents Interface")
+	]
+	dispinterface _ILNPManagerEvents
+	{
+		properties:
+		methods:
+	};
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Session Events Handler Interface
+	//	
+	[
+		uuid(FE5B4C53-AD50-4B66-9DFA-E7E009730780),
+		helpstring("_ILNPSessionEvents Interface")
+	]
+	dispinterface _ILNPSessionEvents
+	{
+		properties:
+		methods:
+	};
+*/
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Port Events Handler Interface
+	//	
+	[
+		uuid(30F1AF08-727B-4087-A54C-6D98BD459DD0),
+		helpstring("_ILNPPortEvents Interface"),		
+	]
+	dispinterface _ILNPPortEvents
+	{
+		properties:
+		methods:
+		[id(1), helpstring("method DataHandler")] HRESULT DataHandler([in] VARIANT vData);
+	};
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Manager COM Component
+	//	
+	[
+		uuid(D0F142C2-C587-4A64-A4D2-D53CB0C02A58),
+		helpstring("LNPManager Class")
+	]
+	coclass LNPManager
+	{
+		[default] interface ILNPManager;
+//		[default, source] dispinterface _ILNPManagerEvents;
+	};
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Session COM Component
+	//	
+	[
+		uuid(F2C4E6A4-8129-45C9-82C7-3E0A102FF8A5),
+		helpstring("LNPSession Class")
+	]
+	coclass LNPSession
+	{
+		[default] interface ILNPSession;
+//		[default, source] dispinterface _ILNPSessionEvents;
+	};
+
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// LNP Port COM Component
+	//	
+	[
+		uuid(69E24352-C833-46DA-A5BF-AEEDB685179C),
+		helpstring("LNPChannel Class")
+	]
+	coclass LNPPort
+	{
+		[default] interface ILNPPort;
+		[default, source] dispinterface _ILNPPortEvents;
+	};
+};
